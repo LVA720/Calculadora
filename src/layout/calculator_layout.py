@@ -27,7 +27,7 @@ def create_layout():
             dbc.Button("-", color="light", className="me-1",style={"color": "#058105"}),
             dbc.Button("0", color="light", className="me-1",style={"color": "#058105"}),
             dbc.Button(".", color="light", className="me-1",style={"color": "#058105"}),
-            dbc.Button("+/=", color="light", className="me-1",style={"color": "#058105"}),
+            dbc.Button("+/-", color="light", className="me-1",style={"color": "#058105"}),
             dbc.Button("=", color="light", className="me-1",style={"color": "#058105"})
         ],
         style={
