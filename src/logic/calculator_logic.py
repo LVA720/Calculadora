@@ -1,5 +1,6 @@
+
 from sympy import sympify, sqrt
-import re  # ← 正規表現モジュールを使う
+import re  
 
 def evaluate_expression(expression: str):
     try:
@@ -15,5 +16,6 @@ def evaluate_expression(expression: str):
     except Exception as e:
         print("計算中にエラー:", e)
         return "Error"
+
 
 
