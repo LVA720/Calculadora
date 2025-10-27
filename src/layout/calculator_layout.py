@@ -1,6 +1,7 @@
 
-from dash import Dash, html, dash
+from dash import html
 import dash_bootstrap_components as dbc
+from layout.calculator_button import create_buttom
 
 class Layout():
     def create_layout():
@@ -21,7 +22,8 @@ class Layout():
                                                 "padding": "10px",
                                                 "marginBottom": "20px",
                                                 "flex": "0 0 auto"}),
-
+                              
+                              
                                                 dbc.Card(
                                                     dbc.CardBody(
                                                         html.Img(
@@ -39,7 +41,11 @@ class Layout():
                                                     class_name="mb-2",
                                                     style={"border": "none"}
                                                 ),
+
+                                                create_buttom()
+
                                                 Layout.create_buttom()
+
                                             ],
                                 color="success", 
                                 inverse=True,
@@ -53,6 +59,7 @@ class Layout():
                 ]
             ))
         return card
+
 
     def create_buttom():
         buttons = html.Div(
@@ -125,6 +132,7 @@ def create_layout():
     }
 )
     return html.Div([buttons], style={"padding": "20px"})
+
 
 #    return html.Div(
 #        children=[
