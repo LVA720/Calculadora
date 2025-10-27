@@ -12,7 +12,7 @@ class Layout():
                         [
                             dbc.Col(dbc.Card([ 
                                 dbc.CardHeader("Ben 10"),
-                                dbc.CardBody("0", 
+                                dbc.CardBody("0", id= "display",
                                             style={
                                                 "backgroundColor": "black",
                                                 "fontSize": "48px",
