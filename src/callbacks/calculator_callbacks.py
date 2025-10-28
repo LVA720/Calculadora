@@ -18,7 +18,12 @@ def on_click(n_clicks, current_display):
 
     if len(current_display) >= 14 and button_value not in ["C", "CE", "="]:
         return current_display
-    
+    if button_value in operators:
+        if current_display[-1] in operators:
+            return current_display[:-1] + button_value
+        else:
+            return current_display + button_value
+
     if not current_display or current_display == "0":
         if button_value in operators:
             return current_display
@@ -46,9 +51,9 @@ def on_click(n_clicks, current_display):
             return result_str
         except Exception:
             return "Erro"
-    
+
     if button_value == ".":
-        last_number = re.split(r"[+\-x÷%]", current_display[-1])
+        last_number = re.split(r"[+\-x÷%]", current_display)[-1]
         if current_display[-1] in operators:
             return current_display + "0."
         if "." in last_number:
@@ -60,4 +65,5 @@ def on_click(n_clicks, current_display):
             return current_display
         else:
             return button_value
+
     return current_display + str(button_value)
