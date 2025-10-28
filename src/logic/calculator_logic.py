@@ -1,11 +1,18 @@
+
 from sympy import sympify, sqrt
-import re  # ← 正規表現モジュールを使う
+import re  
 
 def evaluate_expression(expression: str):
     try:
-        expression = expression.replace('÷', '/').replace('x', '*')
+        expression = expression.replace('÷', '/')
         
+        expression = expression.replace('x', '*')
+
         expression = expression.replace('%', '/100')
+
+        expression = expression.replace('M+', '+').replace('M-','-')
+
+
 
         expression = re.sub(r'√(\d+)', r'sqrt(\1)', expression)
 
@@ -15,5 +22,3 @@ def evaluate_expression(expression: str):
     except Exception as e:
         print("計算中にエラー:", e)
         return "Error"
-
-
