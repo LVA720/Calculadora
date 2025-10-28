@@ -17,7 +17,7 @@ def create_buttom():
             dbc.Button("4", color="light",id={"type": "button", "index": 4}, className="me-1",style={"color": "#058105"}),
             dbc.Button("5", color="light",id={"type": "button", "index": 5}, className="me-1",style={"color": "#058105"}),
             dbc.Button("6", color="light",id={"type": "button", "index": 6}, className="me-1",style={"color": "#058105"}),
-            dbc.Button("X", color="dark",id={"type": "button", "index": "x"}, className="me-1",style={"color": "#058105"}),
+            dbc.Button("x", color="dark",id={"type": "button", "index": "x"}, className="me-1",style={"color": "#058105"}),
             dbc.Button("÷", color="dark",id={"type": "button", "index": "÷"}, className="me-1",style={"color": "#058105"}),
             dbc.Button("1", color="light",id={"type": "button", "index": 1}, className="me-1",style={"color": "#058105"}),
             dbc.Button("2", color="light",id={"type": "button", "index": 2}, className="me-1",style={"color": "#058105"}),

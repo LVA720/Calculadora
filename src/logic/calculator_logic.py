@@ -4,9 +4,15 @@ import re
 
 def evaluate_expression(expression: str):
     try:
-        expression = expression.replace('÷', '/').replace('X', '*')
+        expression = expression.replace('÷', '/')
         
+        expression = expression.replace('x', '*')
+
         expression = expression.replace('%', '/100')
+
+        expression = expression.replace('M+', '+').replace('M-','-')
+
+
 
         expression = re.sub(r'√(\d+)', r'sqrt(\1)', expression)
 
