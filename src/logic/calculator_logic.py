@@ -3,7 +3,7 @@ import re  # ← 正規表現モジュールを使う
 
 def evaluate_expression(expression: str):
     try:
-        expression = expression.replace('÷', '/').replace('X', '*')
+        expression = expression.replace('÷', '/').replace('x', '*')
         
         expression = expression.replace('%', '/100')
 
