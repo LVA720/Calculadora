@@ -27,7 +27,7 @@ def on_click(n_clicks, current_display):
             if button_value == "-" and last_op != "-":
                 return current_display + "-"
             else:
-                return current_display
+                return current_display[:-1] + button_value
         elif last_op == "√":
             return current_display
         else:
@@ -35,7 +35,9 @@ def on_click(n_clicks, current_display):
 
     #limpar ou 0
     if not current_display or current_display == "0":
-        if button_value in operators:
+        if button_value == "-":
+            return "-"
+        elif button_value in operators:
             return current_display
         elif button_value == ".":
             return "0."
