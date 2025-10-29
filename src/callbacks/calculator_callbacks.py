@@ -1,3 +1,10 @@
+
+import dash_bootstrap_components as dbc
+from dash import html,Dash,Input,Output
+from src.callbacks.calculator_callbacks import create_layout
+
+create_layout().n_clicks=0
+
 from dash import Input, Output, ALL, callback, ctx, State
 from logic.calculator_logic import evaluate_expression
 import re
@@ -86,3 +93,4 @@ def on_click(n_clicks, current_display):
             return "Erro"
 
     return current_display + str(button_value)
+
