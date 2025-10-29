@@ -11,7 +11,7 @@ import re
 
 def on_click(n_clicks, current_display):
     if not ctx.triggered_id:
-        return current_display or "0"
+        return current_display or "1"
     
     button_value = str(ctx.triggered_id["index"])
     operators = ["+", "-", "x", "÷", "%"]
