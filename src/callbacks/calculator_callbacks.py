@@ -15,7 +15,7 @@ operators = ["+", "-", "x", "÷", "%"]
 
 def on_click(n_clicks, current_display):
     if not ctx.triggered_id:
-        return current_display or "1"
+        return current_display or "0"
     
     button_value = str(ctx.triggered_id["index"])
     current_display = current_display or "0"
