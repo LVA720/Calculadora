@@ -31,19 +31,6 @@ def on_click(n_clicks, current_display):
     if button_value == "CE":
         return current_display[:-1] if len(current_display) > 1 else "0"
 
-    #operadores
-    if button_value in operators:
-        if last_op == "√": #impede operador depois de √
-            return current_display
-        if last_op in operators:
-            if button_value == "-" and last_op != "-": #permite o uso de -
-                return current_display + "-"
-            if len(current_display) >= 2 and current_display[-2] in operators: #substitui pelo novo
-                return current_display[:-2] + button_value
-            return current_display[:-1] + button_value
-        
-        return current_display + button_value
-    
     #numeros iniciais / display vazio
     if current_display == "0":
         if button_value == "-":
@@ -54,8 +41,25 @@ def on_click(n_clicks, current_display):
             return "0."
         elif button_value == "√":
             return "√"
+        elif button_value == "=":
+            return current_display
         else:
             return button_value
+
+    #operadores
+    if button_value in operators:
+        if current_display == "-":
+            return "0"
+        if last_op == "√": #impede operador depois de √
+            return current_display
+        if last_op in operators:
+            if button_value == "-" and last_op != "-": #permite o uso de -
+                return current_display + "-"
+            if len(current_display) >= 2 and current_display[-2] in operators: #substitui pelo novo
+                return current_display[:-2] + button_value
+            return current_display[:-1] + button_value
+        
+        return current_display + button_value
         
     #raiz quadrada
     if button_value == "√":
