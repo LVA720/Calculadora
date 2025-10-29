@@ -2,7 +2,6 @@ from dash import html
 import dash_bootstrap_components as dbc
 
 def create_buttom():
-
     layout = [
         ["ON/C","CE","MRC","M-","M+"],
         ["7","8","9","%","√"],
@@ -36,4 +35,4 @@ def create_buttom():
         },
     )
     
-    
+
