@@ -21,13 +21,13 @@ def on_click(n_clicks, current_display):
         return current_display
 
     #operadores
-    last_op = current_display[-1]
     if button_value in operators:
-        if last_op in operators and button_value == "-":
+        last_op = current_display[-1]
+        if last_op in operators:
             if button_value == "-" and last_op != "-":
-                return current_display + button_value
-            elif last_op in operators:
-                return current_display[:-1] + button_value
+                return current_display + "-"
+            else:
+                return current_display
         elif last_op == "√":
             return current_display
         else:
