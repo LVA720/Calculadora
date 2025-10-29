@@ -1,5 +1,6 @@
 from dash import Input, Output, ALL, callback, ctx, State
 from logic.calculator_logic import evaluate_expression
+import re
 @callback(
     Output("display", "children"),
     Input({"type": "button", "index": ALL}, "n_clicks"),
@@ -15,46 +16,85 @@ def on_click(n_clicks, current_display):
     button_value = str(ctx.triggered_id["index"])
     operators = ["+", "-", "x", "÷", "%"]
 
+    #limite de 12 caracteres
+    if len(current_display) >= 14 and button_value not in ["C", "CE", "="]:
+        return current_display
+
+    #operadores
+    if button_value in operators:
+        last_op = current_display[-1]
+        if last_op in operators:
+            if len(current_display)>=2 and current_display[-2] in operators:
+                return current_display[:-2] + button_value
+            
+            elif button_value == "-" and last_op != "-":
+                return current_display + "-"
+            
+            elif last_op == button_value:
+                return current_display
+            
+            else:
+                return current_display[:-1] + button_value
+        elif last_op == "√":
+            return current_display + button_value
+        else:
+            return current_display + button_value
+
+    #limpar ou 0
     if not current_display or current_display == "0":
-        if button_value in operators or button_value == ".":
+        if button_value in operators:
+            return current_display
+        elif button_value == ".":
+            return "0."
+        elif button_value in ["C", "CE"]:
+            return "0"
+        else:
+            return button_value
+
+    #raiz quadrada
+    if button_value == "√":
+        if current_display == "0":
+            return "√"
+        last_op = current_display[-1]
+        if last_op in operators:
+            return current_display + "√"
+        elif last_op == "√":
+            return current_display
+        elif last_op.isdigit():
+            return current_display + "x√"
+        else:
+            return current_display + "√"
+
+    button_value = ctx.triggered_id["index"]
+
+    if not current_display:
+        current_display = "0"
+
+    if button_value == "C":
+        return "0"
+    elif button_value == "CE":
+        return current_display[:-1] if len(current_display) > 1 else "0"
+    elif button_value == "=":
+        try:
+            result = str(evaluate_expression(current_display))
+            result = round(float(result),10)
+            result_str = str(result).rstrip("0").rstrip(".") if "." in str(result) else str(result)
+            return result_str
+        except Exception:
+            return "Erro"
+
+    if button_value == ".":
+        last_number = re.split(r"[+\-x÷%]", current_display)[-1]
+        if current_display[-1] in operators:
+            return current_display + "0."
+        if "." in last_number:
+            return current_display
+        return current_display + "."
+    
+    if not current_display or current_display == "0":
+        if button_value in operators:
             return current_display
         else:
             return button_value
-        
-    if button_value == "C":
-        return "0"
-    
-    elif button_value == "CE":
-        return current_display[:-1] if len(current_display) > 1 else "0"
-   
 
-    button_value = ctx.triggered_id["index"]
-    if button_value == "C":
-        return "0"
-    elif button_value == "CE":
-        return current_display[:-1] if len(current_display) > 1 else "0"
-
-    elif button_value == "=":
-        try:
-            return str(evaluate_expression(current_display))
-        except Exception:
-            return "Erro"
-        
-    if current_display[-1] in operators and button_value in operators:
-        return current_display
-    
-    if button_value == ".":
-        last_number = current_display.split("+")[-1].split("x")[-1].split("÷")[-1]
-        if "." in last_number:
-            return current_display
-    
-    new_display = current_display + button_value 
-    return new_display
-
-    else:
-        if current_display == "0":
-            current_display = ""
-        new_display = current_display + str(button_value)
-        return new_display
-        
-
+    return current_display + str(button_value)
