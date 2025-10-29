@@ -25,7 +25,7 @@ class Layout():
                                                 dbc.Card(
                                                     dbc.CardBody(
                                                         html.Img(
-                                                            src="/assets/ben10_logo.png",
+                                                            src="/assets/asdasdasasdasdad.png",
                                                             style={
                                                                 "display": "block",
                                                                 "margin": "0 auto",

@@ -16,14 +16,24 @@ def on_click(n_clicks, current_display):
     button_value = str(ctx.triggered_id["index"])
     operators = ["+", "-", "x", "÷", "%"]
 
+    #limite de 12 caracteres
     if len(current_display) >= 14 and button_value not in ["C", "CE", "="]:
         return current_display
+
+    #operadores
+    last_op = current_display[-1]
     if button_value in operators:
-        if current_display[-1] in operators:
-            return current_display[:-1] + button_value
+        if last_op in operators and button_value == "-":
+            if button_value == "-" and last_op != "-":
+                return current_display + button_value
+            elif last_op in operators:
+                return current_display[:-1] + button_value
+        elif last_op == "√":
+            return current_display
         else:
             return current_display + button_value
 
+    #limpar ou 0
     if not current_display or current_display == "0":
         if button_value in operators:
             return current_display
@@ -33,6 +43,20 @@ def on_click(n_clicks, current_display):
             return "0"
         else:
             return button_value
+
+    #raiz quadrada
+    if button_value == "√":
+        if current_display == "0":
+            return "√"
+        last_op = current_display[-1]
+        if last_op in operators:
+            return current_display + "√"
+        elif last_op == "√":
+            return current_display
+        elif last_op.isdigit():
+            return current_display + "x√"
+        else:
+            return current_display + "√"
 
     button_value = ctx.triggered_id["index"]
 
