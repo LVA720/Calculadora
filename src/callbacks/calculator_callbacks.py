@@ -24,12 +24,19 @@ def on_click(n_clicks, current_display):
     if button_value in operators:
         last_op = current_display[-1]
         if last_op in operators:
-            if button_value == "-" and last_op != "-":
+            if len(current_display)>=2 and current_display[-2] in operators:
+                return current_display[:-2] + button_value
+            
+            elif button_value == "-" and last_op != "-":
                 return current_display + "-"
+            
+            elif last_op == button_value:
+                return current_display
+            
             else:
                 return current_display[:-1] + button_value
         elif last_op == "√":
-            return current_display
+            return current_display + button_value
         else:
             return current_display + button_value
 
