@@ -22,3 +22,4 @@ def evaluate_expression(expression: str):
     except Exception as e:
         print("計算中にエラー:", e)
         return "Error"
+
