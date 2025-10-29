@@ -22,17 +22,14 @@ def create_buttom():
                 style={"color":"#058105"}
             )
             buttons.append(button)
- 
+
     return html.Div(
         buttons,
         style={
             "display": "grid",
-            "gridTemplateColums":"repeat(5,1fr)",
+            "gridTemplateColumns":"repeat(5,1fr)",
             "gap": "10px",
             "width":"100%",
             "margin":"auto",
-            "padding":"10px",
         },
     )
-    
-

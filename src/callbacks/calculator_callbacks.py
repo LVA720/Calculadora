@@ -1,10 +1,4 @@
 
-import dash_bootstrap_components as dbc
-from dash import html,Dash,Input,Output
-from src.callbacks.calculator_callbacks import create_layout
-
-create_layout().n_clicks=0
-
 from dash import Input, Output, ALL, callback, ctx, State
 from logic.calculator_logic import evaluate_expression
 import re
@@ -28,11 +22,11 @@ def on_click(n_clicks, current_display):
     last_op = current_display[-1]
 
     #limite de 12 caracteres
-    if len(current_display) >= 14 and button_value not in ["C", "CE", "="]:
+    if len(current_display) >= 14 and button_value not in ["ON/C", "CE", "="]:
         return current_display
 
     #limpar ou 0
-    if button_value == "C":
+    if button_value == "ON/C":
         return "0"
     if button_value == "CE":
         return current_display[:-1] if len(current_display) > 1 else "0"
@@ -93,4 +87,3 @@ def on_click(n_clicks, current_display):
             return "Erro"
 
     return current_display + str(button_value)
-
