@@ -53,13 +53,3 @@ class Layout():
                 ]
             ))
         return card
-
-
-#    return html.Div(
-#        children=[
-#            html.Center(html.H1("Calculadora muito foda")),
-#            html.Div(children="Texto", style={"backgroundColor": "#127207", "padding": "10px", "textAlign": "center"}),
-#            html.Div(children=[html.Center(html.H1("Display"))])
-#        ],
-#        #style={"border": "10px solid black", "padding": "50px"}
-#    )
