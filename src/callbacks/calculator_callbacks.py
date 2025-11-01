@@ -18,16 +18,12 @@ def replace(display, value):
 
 def handle_operator(display, value):
     last_op = display[-1]
-    if display == "-":
-        return "0"
-    if last_op == "√": #impede operador depois de √
-        return display
+    if display == "-" or last_op == "√":
+        return "0" if display == "-" else display
     if last_op in operators:
-        if value == "-" and last_op != "-": #permite o uso de -
+        if value == "-" and last_op != "-": 
             return display + "-"
-        if len(display) >= 2 and display[-2] in operators: #substitui pelo novo
-            return display[:-2] + value
-        return display [:-1] + value
+        return display[:-2] + value if len(display) >= 2 and display[-2] in operators else display
     return display + value
 
 def decimal(display):
@@ -35,9 +31,7 @@ def decimal(display):
     last_number = re.split(r"[+\-x÷%]",display)[-1] #numero atual depois do ultimo operador
     if "." in last_number:
         return display
-    if last_op in operators:
-        return display + "0."
-    return display + "."
+    return display + ("0." if last_op in operators else ".")
 
 @callback(
     Output("display", "children"),
@@ -72,27 +66,18 @@ def on_click(n_clicks, current_display):
     #operadores
     if button_value in operators:
         return handle_operator(current_display, button_value)
-
-    #ponto decimal
     if button_value == ".":
         return decimal(current_display)
-
-    #raiz quadrada
-    if button_value == "√":
+    if button_value ==  "√":
         if last_op == "√":
-            return current_display #evita duplo √
-        if last_op.isdigit(): #insere multiplicacao
-            fix = "x" if last_op.isdigit() else ""
-        return current_display + fix + "√"
-
-    #ingual
+            return current_display
+        return f"{current_display}{"x" if last_op.isdigit() else ""}√"
     if button_value == "=":
         try:
             result = evaluate_expression(current_display)
             result = round(float(result), 10)
-            result_str = str(result).rstrip("0").rstrip(".") if "." in str(result) else str(result)
-            return result_str
+            return str(result).rstrip("0").rstrip(".") if "." in str(result) else str(result)
         except Exception:
             return "Erro"
-
+        
     return current_display + str(button_value)
